@@ -9,8 +9,9 @@ class AndroidFeatureConventionPlugin: Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             pluginManager.apply {
-                apply("boycott.android.library")
-                apply("boycott.android.hilt")
+                apply("turla.android.library")
+                apply("turla.android.hilt")
+                apply("org.jetbrains.kotlin.plugin.serialization")
             }
             extensions.configure<LibraryExtension> {
                 testOptions.animationsDisabled = true
@@ -20,6 +21,7 @@ class AndroidFeatureConventionPlugin: Plugin<Project> {
                 add("implementation", project(":core:ui"))
                 add("implementation", project(":core:designsystem"))
 
+                add("implementation", libs.findLibrary("kotlinx.serialization.json").get())
                 add("implementation", libs.findLibrary("androidx.hilt.navigation.compose").get())
                 add("implementation", libs.findLibrary("androidx.lifecycle.runtimeCompose").get())
                 add("implementation", libs.findLibrary("androidx.lifecycle.viewModelCompose").get())
